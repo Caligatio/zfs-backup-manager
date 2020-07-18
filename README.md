@@ -1,6 +1,6 @@
 # ZFS Backup Manager
-ZFS Backup Manger (zbm) is a simple Python program to help manage daily, weekly, and monthly ZFS snapshots.  It is
-primarily designed to be run via cron and is only tested on Linux.
+ZFS Backup Manger (zbm) is a simple Python program to help manage daily, weekly, and monthly ZFS backup snapshots.  It
+is primarily designed to be run via cron and is only tested on Linux.
 
 ## Usage
 Upon installation, an executable should be installed called `zfs_backup_manager` that is the main entrypoint.  It
