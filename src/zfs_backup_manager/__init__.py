@@ -122,6 +122,7 @@ def main(config: Config, dry_run: bool = False) -> int:
         if dataset_config["recursive"]:
             cmd.insert(2, "-r")
 
+        logging.info("Creating snapshot %s", today_snapshot_name)
         logging.debug("Running command: %s", cmd)
         if not dry_run:
             try:
@@ -139,16 +140,19 @@ def main(config: Config, dry_run: bool = False) -> int:
         keep_set = keep_daily_set | keep_weekly_set | keep_monthly_set
 
         for snapshot in set(dataset_snapshots) - keep_set:
+            delete_snapshot_name = "{}@{}{}".format(
+                dataset_config["name"], config.get("snapshot_prefix", ""), snapshot.strftime("%Y%m%d")
+            )
+
             cmd = [
                 "zfs",
                 "destroy",
-                "{}@{}{}".format(
-                    dataset_config["name"], config.get("snapshot_prefix", ""), snapshot.strftime("%Y%m%d")
-                ),
+                delete_snapshot_name,
             ]
             if dataset_config["recursive"]:
                 cmd.insert(2, "-r")
 
+            logging.info("Destroying snapshot %s", delete_snapshot_name)
             logging.debug("Running command: %s", cmd)
             if not dry_run:
                 try:
