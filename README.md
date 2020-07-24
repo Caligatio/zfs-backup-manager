@@ -43,6 +43,13 @@ keep_days = 1
 keep_months = 0
 ```
 
+## Quick Note About cron
+If you are using this tool via cron, the `PATH` variable must be set for the `zfs` command to be found.  Example:
+
+```
+@daily  PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin /usr/local/bin/zfs_backup_manager /path/to/zfs-backup-manager.toml
+```
+
 ## Known Shortcomings
 Below are known shortcomings that are not planned to be fixed.
 
