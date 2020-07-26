@@ -16,6 +16,9 @@ from .types import Config, ValidatedDatasetEntry
 DEFAULT_DOM = 1
 DEFAULT_DOW = 0
 DEFAULT_RECURSIVE = True
+DEFAULT_KEEP_DAYS = 0
+DEFAULT_KEEP_WEEKS = 0
+DEFAULT_KEEP_YEARS = 0
 
 
 def get_sorted_snapshots(config: Config) -> DefaultDict[str, List[date]]:
@@ -67,9 +70,9 @@ def get_dataset_configs(config: Config) -> List[ValidatedDatasetEntry]:
             "recursive": dataset.get("recursive", config.get("recursive", DEFAULT_RECURSIVE)),
             "dom": dataset.get("dom", config.get("dom", DEFAULT_DOM)),
             "dow": dataset.get("dow", config.get("dow", DEFAULT_DOW)),
-            "keep_days": dataset.get("keep_days", config.get("keep_days", 0)),
-            "keep_weeks": dataset.get("keep_weeks", config.get("keep_weeks", 0)),
-            "keep_months": dataset.get("keep_months", config.get("keep_months", 0)),
+            "keep_days": dataset.get("keep_days", config.get("keep_days", DEFAULT_KEEP_DAYS)),
+            "keep_weeks": dataset.get("keep_weeks", config.get("keep_weeks", DEFAULT_KEEP_WEEKS)),
+            "keep_months": dataset.get("keep_months", config.get("keep_months", DEFAULT_KEEP_YEARS)),
         }
         ret_val.append(validated_dict)
 
