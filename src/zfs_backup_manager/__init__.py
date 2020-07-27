@@ -14,7 +14,7 @@ import toml
 from .types import Config, ValidatedDatasetEntry
 
 DEFAULT_DOM = 1
-DEFAULT_DOW = 0
+DEFAULT_DOW = 7
 DEFAULT_RECURSIVE = True
 DEFAULT_KEEP_DAYS = 0
 DEFAULT_KEEP_WEEKS = 0
@@ -137,9 +137,15 @@ def main(config: Config, dry_run: bool = False) -> int:
         dataset_snapshots = get_sorted_snapshots(config)[dataset_config["name"]]
         keep_daily_set = set(dataset_snapshots[: dataset_config["keep_days"]])
         keep_weekly_set = set(
-            [snapshot for snapshot in dataset_snapshots if snapshot.isoweekday() == dataset_config["dow"]]
+            [snapshot for snapshot in dataset_snapshots if snapshot.isoweekday() == dataset_config["dow"]][
+                : dataset_config["keep_weeks"]
+            ]
         )
-        keep_monthly_set = set([snapshot for snapshot in dataset_snapshots if snapshot.day == dataset_config["dom"]])
+        keep_monthly_set = set(
+            [snapshot for snapshot in dataset_snapshots if snapshot.day == dataset_config["dom"]][
+                : dataset_config["keep_months"]
+            ]
+        )
         keep_set = keep_daily_set | keep_weekly_set | keep_monthly_set
 
         for snapshot in set(dataset_snapshots) - keep_set:

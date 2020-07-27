@@ -13,8 +13,8 @@ Below is an example config TOML file that illustrates all the available options.
 ```toml
 # day of month is the date that should be considered as a monthly candidate, defaults to 1 (1st of month)
 dom = 1
-# day of week is the date that should be considered as a weekly candidate, defaults to 0 (Sunday)
-dow = 0
+# day of week is the date that should be considered as a weekly candidate, defaults to 7 (Sunday)
+dow = 7
 
 # Number of days/weeks/months to keep, all default to 0
 keep_days = 7
